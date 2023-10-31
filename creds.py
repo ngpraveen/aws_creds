@@ -2,6 +2,7 @@ import boto3
 from configparser import ConfigParser
 import yaml
 import os
+from typing import List
 
 
 # read basedir and mfa arn from config.yaml file
@@ -13,7 +14,7 @@ MFA_ARN = _config['mfaArn']
 
 
 
-def get_credentials(profile="default", only_expiration=False):
+def get_credentials(profile : str ="default" , only_expiration: bool =False) -> List[str]:
     """Returns a set of credentials. It can be either 
     the "default" profile's credentials or any other profile's credentials"""
     
@@ -41,7 +42,7 @@ def get_credentials(profile="default", only_expiration=False):
     return aws_access_key_id, aws_secret_access_key, aws_session_token
 
 
-def update_temp_credentials(mfa_code):
+def update_temp_credentials(mfa_code: int) -> None:
 
     aws_access_key_id, aws_secret_access_key, _ = get_credentials()
     sts_client = boto3.client('sts', 
@@ -72,7 +73,7 @@ def update_temp_credentials(mfa_code):
 
                 
 
-def get_credentials_expiry_info():
+def get_credentials_expiry_info() -> None:
     import datetime
     expiry = get_credentials("Temp", only_expiration=True)
     expiry = datetime.datetime.strptime(expiry, "%Y-%m-%d %H:%M:%S")
