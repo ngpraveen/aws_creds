@@ -1,0 +1,2 @@
+baseDir    : '/path/to/credentials/file'
+mfaArn     : 'arn:aws:iam::<AWS_ACC_NUMBER>:mfa/<MFA_NAME>'
