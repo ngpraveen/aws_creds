@@ -1,4 +1,4 @@
-Thi code can be used to generate temporary credentials (with MFA).
+This module can be used to access and update temporary credentials (with MFA).
 
 
 
